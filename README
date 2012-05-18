@@ -1,0 +1,25 @@
+Panoramio Wrapper Class
+=======================
+
+* Anthony Mills (<me@anthony-mills.com>)
+* Version: 0.1
+* Website: http://www.development-cycle.com/
+* Github: https://github.com/anthony-mills/Panoramio
+
+This free software is licensed under version 3 of the GPL license.
+
+About
+-----
+
+This wrapper class allows you to retrieve images back as a PHP object from the Panoramio data API.
+
+Usage
+-----
+
+At its most basic simply:
+
+* Include and then instansiate the Panoramio wrapper class in your code
+* Set the longitude and latitude of the location you would like to collect images near with the setRequiredLocation method
+* Then call the getPanoramioImages to actually contact the API and request images for the location
+
+See example.php to see a very basic example of how the class can be used using the default coordinates for Sydney, Australia.
