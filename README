@@ -22,4 +22,4 @@ At its most basic simply:
 * Set the longitude and latitude of the location you would like to collect images near with the setRequiredLocation method
 * Then call the getPanoramioImages to actually contact the API and request images for the location
 
-See example.php to see a very basic example of how the class can be used using the default coordinates for Sydney, Australia.
+See Code/example.php for very basic example of how the class can be used using the default co-ordinates for Sydney, Australia.
