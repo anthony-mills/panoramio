@@ -47,7 +47,7 @@
 	 */
 	public function setRequiredLocation($placeLatitude, $placeLongitude)
 	{
-		$this->_requiredLattitude = $placeLatitude;
+		$this->_requiredLatitude = $placeLatitude;
 		$this->_requiredLongitude = $placeLongitude;
 	}
 	
