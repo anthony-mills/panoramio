@@ -90,7 +90,7 @@
 	 */	
 	 public function setPanoramioSize($panoramioSize)
 	 {
-	 	$this->_panoamioImageSize = $panoramioSize;
+	 	$this->_panoramioImageSize = $panoramioSize;
 	 }
 	
 	/**
