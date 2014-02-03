@@ -59,7 +59,7 @@
 	 */
 	public function orderImages($imageOrder) 
 	{
-		$this->panoramioOrdering = $imageOrder;
+		$this->_panoramioOrdering = $imageOrder;
 	}
 	
 	/**
