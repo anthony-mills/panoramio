@@ -16,10 +16,10 @@ This wrapper class allows you to retrieve images back as a PHP object from the P
 Usage
 -----
 
-At its most basic simply:
+To use the features of the class simply:
 
 * Include and then instansiate the Panoramio wrapper class in your code
 * Set the longitude and latitude of the location you would like to collect images near with the setRequiredLocation method
-* Then call the getPanoramioImages to actually contact the API and request images for the location
+* Then call the getPanoramioImages method to actually contact the API and request images for the location
 
-See Code/example.php for very basic example of how the class can be used using the default co-ordinates for Sydney, Australia.
+See the file Code/example.php for a very basic usage example of how the class can be to get images with the default co-ordinates for Sydney, Australia.
