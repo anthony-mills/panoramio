@@ -4,7 +4,7 @@
  * 
  * @package Panoramio Wrapper Class
  * @author Anthony Mills
- * @copyright 2012 Anthony Mills ( anthony-mills.com )
+ * @copyright 2012 Anthony Mills ( http://anthony-mills.com )
  * @license GPL V3.0
  * @version 0.1
  */
@@ -114,7 +114,7 @@
 	 }
 	
 	/** 
-	 * Calculate the bounding box for a place via its latitude, longitude
+	 * Calculate the bounding box for a location via its latitude, longitude
 	 */
 	 protected function _calculateBoundingBox()
 	 {
@@ -134,7 +134,7 @@
 	  * @param int $placeLongitude
 	  * @param int $directionBearing
 	  * 
-	  * @return array
+	  * @return array $newLocation
 	  */
 	 protected function _calculateNewPosition($placeLatitude, $placeLongitude, $directionBearing)
 	 {
@@ -149,21 +149,21 @@
 	 /**
 	  * Assemble the request data in preperation for passing to the API
 	  * 
-	  * @return string
+	  * @return string $apiRequest
 	  */
 	  protected function _buildRequest() {
-	  	$request = $this->_apiUrl . '?set=' . $this->_panoramioSet . '&from=0&to=' . $this->_panoramioImageNumber . 
+	  	$apiRequest = $this->_apiUrl . '?set=' . $this->_panoramioSet . '&from=0&to=' . $this->_panoramioImageNumber . 
 					'&minx=' . $this->_requiredMinLongitude  . '&miny=' . $this->_requiredMinLatitude. 
 					'&maxx=' . $this->_requiredMaxLongitude . '&maxy=' . $this->_requiredMaxLatitude . 
 					'&size=' . $this->_panoramioImageSize . '&order=' . $this->_panoramioOrdering;
-		return $request;
+		return $apiRequest;
 	  }
 	  
 	 /**
 	  * Send a formatted string of data as a GET to the API and collect the response
 	  * 
-	  * @param str $apiData
-	  * @return array
+	  * @param string $apiData
+	  * @return array $apiResponse
 	  */
 	 protected function _processRequest($apiRequest)
 	 {
