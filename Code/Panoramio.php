@@ -16,17 +16,18 @@
 	var $_requiredLongitude = '151.2181';	
 	
 	// The outer limits of the box we would like to search for images within
-	var $_requiredMinLatitude = NULL;
-	var $_requiredMinLongitude = NULL;
-	var $_requiredMaxLatitude = NULL;
-	var $_requiredMaxLongitude = NULL;
+	var $_requiredMinLatitude = 0;
+	var $_requiredMinLongitude = 0;
+	var $_requiredMaxLatitude = 0;
+	var $_requiredMaxLongitude = 0;
 	
 	// The distance in kilometers from the position you would like to search for images
 	var $_locationDistance = 20;
 		
 	// The default type of Panoramio image set to retrieve
 	var $_panoramioSet = 'public';
-	var $_panoramioImageNumber = 20;	
+	var $_panoramioImageNumber = 20;
+	var $_panoramioStartingImage = 0;	
 	
 	// The size for the return images
 	var $_panoramioImageSize = 'medium';
@@ -45,12 +46,29 @@
 	 * @param string $placeLatitude
 	 * @param string $placeLongitude
 	 */
-	public function setRequiredLocation($placeLatitude, $placeLongitude)
+	public function setRequiredLocation($placeLatitude, $placeLongitude,$locationDistance)
 	{
 		$this->_requiredLatitude = $placeLatitude;
 		$this->_requiredLongitude = $placeLongitude;
+		$this->_locationDistance = $locationDistance;
 	}
-	
+
+	/**
+	* Set the location box via min/max longitude and latitude of where you would like to get images.
+	*
+	* @param string $requiredMinLatitude
+	* @param string $requiredMaxLatitude
+	* @param string $requiredMinLongitude
+	* @param string $requiredMaxLongitude
+	*/
+	public function setBoxLocation($requiredMinLatitude, $requiredMaxLatitude, $requiredMinLongitude, $requiredMaxLongitude) {
+		// The outer limits of the box we would like to search for images within
+		$this->_requiredMinLatitude = $requiredMinLatitude;
+		$this->_requiredMaxLatitude = $requiredMaxLatitude;
+		$this->_requiredMinLongitude = $requiredMinLongitude;
+		$this->_requiredMaxLongitude = $requiredMaxLongitude;
+	}
+
 	/**
 	 * Set the ordering of images returned from Pamoramio, class default is upload_date but 
 	 * can also be set to "popularity"
@@ -99,12 +117,17 @@
 	 * @param int $imageNumber
 	 * @return object 
 	 */	
-	 public function getPanoramioImages($imageNumber = NULL)
+	 public function getPanoramioImages($imageNumber = $this->_panoramioImageNumber, $calculateBox = true, $startingImage = 0 ) {
 	 {
+		if (!empty($startingImage)) {
+			$this->_panoramioStartingImage = $startingImage;
+		}
 	 	if (!empty($imageNumber)) {
 	 		$this->_panoramioImageNumber = $imageNumber;
 	 	} 
-		$this->_calculateBoundingBox();
+		if ($calculateBox){
+			$this->_calculateBoundingBox();
+		}
 		$apiRequest = $this->_buildRequest();
 		$apiResponse = $this->_processRequest($apiRequest);
 		
@@ -152,7 +175,9 @@
 	  * @return string $apiRequest
 	  */
 	  protected function _buildRequest() {
-	  	$apiRequest = $this->_apiUrl . '?set=' . $this->_panoramioSet . '&from=0&to=' . $this->_panoramioImageNumber . 
+		$apiRequest = $this->_apiUrl . '?set=' . $this->_panoramioSet .
+					'&from=' . $this->_panoramioStartingImage .
+					'&to=' . ($this->_panoramioStartingImage + $this->_panoramioImageNumber) .
 					'&minx=' . $this->_requiredMinLongitude  . '&miny=' . $this->_requiredMinLatitude. 
 					'&maxx=' . $this->_requiredMaxLongitude . '&maxy=' . $this->_requiredMaxLatitude . 
 					'&size=' . $this->_panoramioImageSize . '&order=' . $this->_panoramioOrdering;
@@ -174,7 +199,7 @@
         curl_setopt($ch, CURLOPT_USERAGENT, $this->_requestUserAgent);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_requestHeaders);	
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_requestHeaders);
 		
 		$apiResponse = curl_exec($ch);
 		$responseInformation = curl_getinfo($ch);
