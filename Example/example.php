@@ -1,11 +1,13 @@
 <?php
-require('Panoramio.php');
+require('../src/mills/panoramio/Panoramio.php');
 
-$panoramioClass = new panoramioAPI();
+$panoramioClass = new mills\panoramio\panoramioAPI();
+
 $localImages = $panoramioClass->getPanoramioImages();
 
 if (!empty($localImages)) {
 	$imageTemplate = file_get_contents('show_image.phtml');
+	
 	foreach($localImages as $localImage) {
 		$imageDisplay = str_replace('{image_url}', $localImage->photo_file_url, $imageTemplate);
 		$imageDisplay = str_replace('{photo_url}', $localImage->photo_url, $imageDisplay);		
@@ -13,4 +15,3 @@ if (!empty($localImages)) {
 		echo $imageDisplay;	
 	}
 }
-?>

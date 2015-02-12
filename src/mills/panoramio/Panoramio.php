@@ -6,9 +6,10 @@
  * @author Anthony Mills
  * @copyright 2012 Anthony Mills ( http://anthony-mills.com )
  * @license GPL V3.0
- * @version 0.1
+ * @version 0.2
  */
- 
+ namespace mills\panoramio;
+
  class panoramioAPI 
  {
 	// Supplied Cordinates to search near for images
@@ -117,7 +118,7 @@
 	 * @param int $imageNumber
 	 * @return object 
 	 */	
-	 public function getPanoramioImages($imageNumber = $this->_panoramioImageNumber, $calculateBox = true, $startingImage = 0 ) {
+	 public function getPanoramioImages($imageNumber = 5, $calculateBox = true, $startingImage = 0 ) 
 	 {
 		if (!empty($startingImage)) {
 			$this->_panoramioStartingImage = $startingImage;
@@ -134,7 +135,7 @@
 		if (!empty($apiResponse)) {
 			return $apiResponse->photos;
 		}
-	 }
+	}
 	
 	/** 
 	 * Calculate the bounding box for a location via its latitude, longitude

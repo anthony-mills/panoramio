@@ -2,8 +2,8 @@ Panoramio Wrapper Class
 =======================
 
 * Anthony Mills (<me@anthony-mills.com>)
-* Version: 0.1
-* Website: http://www.development-cycle.com/
+* Version: 0.2
+* Website: http://anthony-mills.com/
 * Github: https://github.com/anthony-mills/Panoramio
 
 This free software is licensed under version 3 of the GPL license.
@@ -22,4 +22,4 @@ To use the features of the class simply:
 * Set the longitude and latitude of the location you would like to collect images near with the setRequiredLocation method
 * Then call the getPanoramioImages method to actually contact the API and request images for the location
 
-See the file Code/example.php for a very basic usage example of how the class can be to get images with the default co-ordinates for Sydney, Australia.
+See the file Example/example.php for a very basic use case example of how the class can be to get images with the default co-ordinates for Sydney, Australia.
